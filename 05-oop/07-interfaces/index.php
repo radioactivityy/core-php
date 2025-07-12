@@ -1,3 +1,50 @@
+<?php
+interface ContentInterface
+{
+    public function display();
+    public function edit();
+
+}
+class Article implements ContentInterface{
+    private $title;
+    private $content;
+    public function __construct(string $title, string $content){
+        $this->title = $title;
+        $this->content = $content;
+    }
+    public function display(){
+        echo "Title: " . $this->title . "\n";
+        echo "Content: " . $this->content . "\n";
+    }
+    public function edit(){
+        echo "Editing Title: " . $this->title . "\n";
+        echo "Editing Content: " . $this->content . "\n";
+    }
+
+}
+class Video implements ContentInterface{
+    private $title;
+    private $url;
+
+    public function __construct(string $title, string $url){
+        $this->title = $title;
+        $this->url = $url;
+    }
+    public function display(){
+        echo "Title: " . $this->title . "\n";
+        echo "<iframe src='{$this->url}' </iframe>\n}'";
+    }
+    public function edit(){
+        echo "Editing the video: " . $this->title . "\n";
+
+    }
+}
+$article = new Article("Title", "Content");
+$video = new Video("Title", "https://tietoevry.udemy.com/course/php-from-scratch-course/learn/lecture/41057860#overview");
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +63,11 @@
   </header>
   <div class="container mx-auto p-4 mt-4">
     <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-      <!-- Output -->
+      <?= $article -> display()?>
     </div>
+      <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+          <?= $video -> display()?>
+      </div>
   </div>
 </body>
 
