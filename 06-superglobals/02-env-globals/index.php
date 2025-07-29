@@ -1,3 +1,8 @@
+<?php
+//var_dump(getenv());
+echo getenv('HOME');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
