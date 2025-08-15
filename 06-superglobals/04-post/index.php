@@ -1,3 +1,15 @@
+<?php
+// isser cheks whether a variable is set
+// use htmlspecialchars when you echo to avoid xss
+$submitted = false;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    $title = 'title: ' . htmlspecialchars($_POST['title']);
+	$description = 'description: ' . htmlspecialchars($_POST['description']);
+//    echo $title, $description;
+	$submitted = true;
+};
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,10 +40,17 @@
           <a href="#" class="text-blue-500 hover:underline">Back to Listings</a>
         </div>
       </form>
+		<?php if ($submitted): ?>
 
-      <!-- Display submitted data -->
+		  <p>
+			  <strong>Title:</strong>
+			  <?= $title ?>
+			  <strong>DESCRIPTION:</strong>
+			  <?=   $description ?>
+		  </p>
+		  <?php endif; ?>
+	  </div>
     </div>
-  </div>
 </body>
 
 </html>
