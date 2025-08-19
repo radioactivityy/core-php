@@ -6,7 +6,25 @@ $submitted = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
   $title = htmlspecialchars($_POST['title'] ?? '');
   $description = htmlspecialchars($_POST['description'] ?? '');
+// filename is array
+  $file = $_FILES['logo'];
+  if ($file['error'] === UPLOAD_ERR_OK) {
+      $uploadDir = 'uploads/';
+      if (!is_dir($uploadDir)) {
+          mkdir($uploadDir, 0755, true);
+      }
+      $name = basename($uploadDir[['name']]);
+      $newName = uniqid() . '-' . $name;
+      $path = $uploadDir . $newName;
 
+      if(move_uploaded_file($uploadDir['tmp_name'], $path)){
+          echo 'File Uploaded!';
+      } else{
+          echo 'File Upload Error: ' . $file['error'];
+      }
+  } else {
+      echo 'File Upload Error: ' . $file['error'];
+  }
   $submitted = true;
 }
 ?>

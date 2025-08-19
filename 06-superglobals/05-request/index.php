@@ -1,3 +1,8 @@
+<!--just dont use request, use post and get-->
+<?php
+echo $_REQUEST['name'] ?? '';
+
+?>
 <form method="post">
   <div>
     <label for="name">Name:</label>
